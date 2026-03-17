@@ -1,0 +1,80 @@
+#+title: cc-statusline-nepes
+#+description: Nepes color theme for Claude Code status line
+
+Starship-style status line for [[https://docs.anthropic.com/en/docs/claude-code][Claude Code]] using the Nepes corporate colorscheme.
+
+Part of the [[https://github.com/kayspark][Nepes Colorscheme]] suite.
+
+* Features
+
+- 24-bit truecolor from the Nepes dark palette
+- Git branch + worktree detection
+- Context window remaining (green / yellow / red thresholds)
+- Session cost tracking
+- Vim mode indicator (N/I)
+
+| Element        | Color         | Hex       |
+|----------------+---------------+-----------|
+| Path           | Cyan          | =#3A9BA5= |
+| Git branch     | Magenta       | =#A274C3= |
+| Model name     | Orange        | =#FEA413= |
+| Context > 30%  | Mint green    | =#3DDC84= |
+| Context 10-30% | Yellow        | =#E8C55A= |
+| Context < 10%  | Red           | =#FF5C5C= |
+| Cost / dimmed  | Slate-brown   | =#8A9199= |
+| Vim normal     | Sapphire blue | =#5C8CFF= |
+| Vim insert     | Mint green    | =#3DDC84= |
+
+* Screenshots
+
+| Dark |
+|------|
+| [[file:docs/dark.png]] |
+
+* Requirements
+
+- =jq= (JSON parsing)
+- =git= (branch detection)
+- A truecolor terminal (kitty, WezTerm, iTerm2, Ghostty, etc.)
+
+* Installation
+
+** 1. Clone
+
+#+begin_src sh
+git clone https://github.com/kayspark/cc-statusline-nepes.git
+#+end_src
+
+** 2. Configure Claude Code
+
+Add to =~/.claude/settings.json= (or =~/.config/claude/settings.json=):
+
+#+begin_src json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "sh ~/path/to/cc-statusline-nepes/statusline.sh"
+  }
+}
+#+end_src
+
+Or symlink into your Claude config directory:
+
+#+begin_src sh
+ln -sf ~/path/to/cc-statusline-nepes/statusline.sh ~/.config/claude/statusline-command.sh
+#+end_src
+
+** 3. Restart Claude Code
+
+The status line updates automatically after each assistant message.
+
+* Customization
+
+Edit the color variables at the top of =statusline.sh=.
+All colors use 24-bit ANSI escapes (=\033[38;2;R;G;Bm=), so any hex color works.
+
+To add or remove segments, modify the =# --- assemble ---= section.
+
+* Credits
+
+Colors from [[https://github.com/kayspark/nepes-palette][nepes-palette]].
