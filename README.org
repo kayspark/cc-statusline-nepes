@@ -75,6 +75,8 @@ All colors use 24-bit ANSI escapes (=\033[38;2;R;G;Bm=), so any hex color works.
 
 To add or remove segments, modify the =# --- assemble ---= section.
 
-* Credits
+* Related
 
-Colors from [[https://github.com/kayspark/nepes-palette][nepes-palette]].
+- [[https://github.com/kayspark/nepes-palette][nepes-palette]] — single source of truth for all Nepes themes
+- [[https://github.com/kayspark/kitty-nepes][kitty-nepes]] — terminal ANSI colors that back this status line
+- [[https://github.com/kayspark/claude-code-nepes][claude-code-nepes]] — full Claude Code JSON theme (complements this status line)
