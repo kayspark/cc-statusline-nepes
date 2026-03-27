@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Claude Code status line — nepes colorscheme
 # Input: JSON via stdin
 
@@ -24,8 +24,10 @@ c_fg="\033[38;2;220;216;212m"       # #DCD8D4
 c_reset="\033[0m"
 
 # --- display path: shorten $HOME to ~ ---
-home="$HOME"
-display_path="${cwd/#$home/\~}"
+case "$cwd" in
+    "$HOME"*) display_path="~${cwd#"$HOME"}" ;;
+    *) display_path="$cwd" ;;
+esac
 
 # --- git branch + worktree ---
 branch=""
@@ -45,11 +47,11 @@ ctx_part=""
 if [ -n "$remaining" ]; then
     pct=$(printf "%.0f" "$remaining")
     if [ "$pct" -le 10 ]; then
-        ctx_part=" ${c_red}${pct}%%${c_reset}"
+        ctx_part=" ${c_red}${pct}%${c_reset}"
     elif [ "$pct" -le 30 ]; then
-        ctx_part=" ${c_yellow}${pct}%%${c_reset}"
+        ctx_part=" ${c_yellow}${pct}%${c_reset}"
     else
-        ctx_part=" ${c_green}${pct}%%${c_reset}"
+        ctx_part=" ${c_green}${pct}%${c_reset}"
     fi
 fi
 
